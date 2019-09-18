@@ -10,39 +10,44 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-public class TrainAppSercurity extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String USER_ROLE = "USER";
     private static final String ADMIN_ROLE = "ADMIN";
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth)
-            throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("user")
-                .password(encoder().encode("password"))
-                .roles(USER_ROLE)
-                .and()
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+        auth.inMemoryAuthentication()
                 .withUser("admin")
                 .password(encoder().encode("admin"))
-                .roles(USER_ROLE, ADMIN_ROLE);
+                .roles(ADMIN_ROLE)
+                .and()
+                .withUser("user")
+                .password(encoder().encode("user"))
+                .roles(USER_ROLE);
+
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .httpBasic()
+
+        http.httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/TrainApp/lookup/**/create/**").hasRole(ADMIN_ROLE)
+                .antMatchers(HttpMethod.GET, "/report/getAll")
+                .hasRole(ADMIN_ROLE)
                 .and()
-                .csrf().disable()
-                .formLogin().disable();
+                .csrf().disable();
+
     }
 
     @Bean
-    public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
+    public PasswordEncoder encoder(){
+       return new BCryptPasswordEncoder();
     }
+
+
+
+
 }

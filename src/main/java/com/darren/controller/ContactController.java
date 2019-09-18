@@ -2,6 +2,7 @@ package com.darren.controller;
 
 import com.darren.domain.Contact;
 import com.darren.service.ContactService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,5 +45,47 @@ public class ContactController {
     @ResponseBody
     public Set<Contact> getAll() {
         return contactService.getAll();
+    }
+
+    @RunWith(SpringRunner.class)
+    @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
+    public static class TrainAppSecurityTest {
+
+        @Autowired
+        private TestRestTemplate restTemplate;
+
+        private String baseURL="http://localhost:8080/TrainApp";
+
+        @Autowired
+
+        @Before
+        public void addDummyData(){
+
+        }
+
+        @Test
+        public void whenCorrectCredentialsWillBe200() throws Exception {
+
+            /*ResponseEntity<String> response = restTemplate.withBasicAuth("admin", "admin").getForEntity(baseURL + "/getall", String.class);
+
+            System.out.println(response.getStatusCode());
+            System.out.println(response.getBody());
+
+            assertEquals(HttpStatus.OK, response.getStatusCode());*/
+
+        }
+
+        @Test
+        public void whenIncorrectCredentialsWillBe401() throws Exception {
+
+           /* ResponseEntity<String> response = restTemplate.withBasicAuth("admin", "admins").getForEntity(baseURL + "/getall", String.class);
+
+            System.out.println(response.getStatusCode());
+            System.out.println(response.getBody());
+
+            assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());*/
+
+        }
+
     }
 }
