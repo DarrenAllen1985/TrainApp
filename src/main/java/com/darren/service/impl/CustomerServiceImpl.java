@@ -4,49 +4,45 @@ import com.darren.domain.Customer;
 import com.darren.repositories.CustomerRepository;
 import com.darren.repositories.impl.CustomerRepositoryImpl;
 import com.darren.service.CustomerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service("CustomerServiceImpl")
 public class CustomerServiceImpl implements CustomerService {
-    @Autowired
-
-    private static CustomerServiceImpl service = null;
-    private CustomerRepository repository;
+    private final CustomerRepository customerRepository;
 
     private CustomerServiceImpl() {
-        this.repository = CustomerRepositoryImpl.getRepository();
+        this.customerRepository = CustomerRepositoryImpl.getRepository();
     }
 
-    public static CustomerServiceImpl getService(){
+   /* public static CustomerServiceImpl getService(){
         if (service == null) service = new CustomerServiceImpl();
         return service;
-    }
+    }*/
 
     @Override
     public Customer create(Customer customer) {
-        return this.repository.create(customer);
+        return this.customerRepository.create(customer);
     }
 
     @Override
     public Customer update(Customer customer) {
-        return this.repository.update(customer);
+        return this.customerRepository.update(customer);
     }
 
     @Override
     public void delete(String s) {
-        this.repository.delete(s);
+        this.customerRepository.delete(s);
     }
 
     @Override
     public Customer read(String s) {
-        return this.repository.read(s);
+        return this.customerRepository.read(s);
     }
 
     @Override
     public Set<Customer> getAll() {
-        return this.repository.getAll();
+        return this.customerRepository.getAll();
     }
 }

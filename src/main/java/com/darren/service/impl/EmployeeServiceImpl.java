@@ -1,6 +1,7 @@
 package com.darren.service.impl;
 
 import com.darren.domain.Employee;
+import com.darren.domain.Website;
 import com.darren.repositories.EmployeeRepository;
 import com.darren.repositories.impl.EmployeeRepositoryImpl;
 import com.darren.service.EmployeeService;
@@ -11,42 +12,39 @@ import java.util.Set;
 
 @Service("EmployeeServiceImpl")
 public class EmployeeServiceImpl implements EmployeeService {
-    @Autowired
-
-    private static EmployeeServiceImpl service = null;
-    private EmployeeRepository repository;
+    private final EmployeeRepository employeeRepository;
 
     private EmployeeServiceImpl() {
-        this.repository = EmployeeRepositoryImpl.getRepository();
+        this.employeeRepository = EmployeeRepositoryImpl.getRepository();
     }
 
-    public static EmployeeServiceImpl getService(){
+    /*public static EmployeeServiceImpl getService(){
         if (service == null) service = new EmployeeServiceImpl();
         return service;
-    }
+    }*/
 
     @Override
     public Employee create(Employee smployee) {
-        return this.repository.create(smployee);
+        return this.employeeRepository.create(smployee);
     }
 
     @Override
     public Employee update(Employee smployee) {
-        return this.repository.update(smployee);
+        return this.employeeRepository.update(smployee);
     }
 
     @Override
     public void delete(String s) {
-        this.repository.delete(s);
+        this.employeeRepository.delete(s);
     }
 
     @Override
     public Employee read(String s) {
-        return this.repository.read(s);
+        return this.employeeRepository.read(s);
     }
 
     @Override
     public Set<Employee> getAll() {
-        return this.repository.getAll();
+        return this.employeeRepository.getAll();
     }
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.HashSet;
 import java.util.Set;
 
-@Repository
+@Repository("TellerRepository")
 public class TellerRepositoryImpl implements TellerRepository {
 
     private static TellerRepositoryImpl repository = null;

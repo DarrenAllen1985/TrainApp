@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-@Repository
+@Repository("AddressRepository")
 public class AddressRepositoryImpl implements AddressRepository {
 
     private static AddressRepositoryImpl repository = null;

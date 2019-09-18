@@ -1,0 +1,49 @@
+package com.darren.controller;
+
+
+import com.darren.domain.Admin;
+import com.darren.service.AdminService;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
+
+@RestController
+@RequestMapping("/admin")
+public class AdminController {
+    private final AdminService adminService;
+
+    public AdminController(@Qualifier("AdminServiceImpl") AdminService adminService) {
+        this.adminService = adminService;
+    }
+
+    @PostMapping("/create")
+    @ResponseBody
+    public Admin create(@RequestBody Admin admin) {
+        return adminService.create(admin);
+    }
+
+    @PutMapping("/update")
+    @ResponseBody
+    public Admin update(@RequestBody Admin admin) {
+        return adminService.update(admin);
+    }
+
+    @GetMapping("/read/{id}")
+    @ResponseBody
+    public Admin read(@PathVariable String id) {
+        return adminService.read(id);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseBody
+    public void delete(@PathVariable String id) {
+        adminService.delete(id);
+    }
+
+    @GetMapping("/getAll/all")
+    @ResponseBody
+    public Set<Admin> getAll() {
+        return adminService.getAll();
+    }
+}

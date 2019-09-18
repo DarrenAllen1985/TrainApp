@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.HashSet;
 import java.util.Set;
 
-@Repository
+@Repository("CustomerRepository")
 public class CustomerRepositoryImpl implements CustomerRepository {
 
     private static CustomerRepositoryImpl repository = null;

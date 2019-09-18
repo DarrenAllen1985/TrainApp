@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.HashSet;
 import java.util.Set;
 
-@Repository
+@Repository("RegionRepository")
 public class RegionRepositoryImpl implements RegionRepository {
 
     private static RegionRepositoryImpl repository = null;

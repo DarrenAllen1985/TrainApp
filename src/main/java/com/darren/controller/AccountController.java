@@ -1,0 +1,49 @@
+package com.darren.controller;
+
+import com.darren.domain.Account;
+import com.darren.service.AccountService;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Set;
+
+@RestController
+@RequestMapping(value = "/account")
+public class AccountController {
+    private final AccountService accountService;
+
+    public AccountController(@Qualifier("AccountServiceImpl") AccountService accountService, RestTemplate restTemplate) {
+        this.accountService = accountService;
+    }
+
+    @PostMapping("/create")
+    @ResponseBody
+    public Account create(@RequestBody Account account) {
+        return accountService.create(account);
+    }
+
+    @PutMapping("/update")
+    @ResponseBody
+    public Account update(@RequestBody Account account) {
+        return accountService.update(account);
+    }
+
+    @GetMapping("/read/{id}")
+    @ResponseBody
+    public Account read(@PathVariable String id) {
+        return accountService.read(id);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseBody
+    public void delete(@PathVariable String id) {
+        accountService.delete(id);
+    }
+
+    @GetMapping("/getAll/all")
+    @ResponseBody
+    public Set<Account> getAll() {
+        return accountService.getAll();
+    }
+}

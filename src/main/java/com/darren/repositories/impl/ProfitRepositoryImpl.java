@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.HashSet;
 import java.util.Set;
 
-@Repository
+@Repository("ProfitRepository")
 public class ProfitRepositoryImpl implements ProfitRepository {
 
     private static ProfitRepositoryImpl repository = null;

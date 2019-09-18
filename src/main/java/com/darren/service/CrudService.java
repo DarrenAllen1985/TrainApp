@@ -1,5 +1,7 @@
 package com.darren.service;
 
+import com.darren.domain.Website;
+
 public interface CrudService<TYPE, ID> {
     TYPE create(TYPE type);
     TYPE update(TYPE type);
