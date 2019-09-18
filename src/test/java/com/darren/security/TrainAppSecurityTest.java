@@ -20,7 +20,7 @@ public class TrainAppSecurityTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    private String baseURL="http://localhost:8080/doctor";
+    private String baseURL="http://localhost:8080/TrainApp";
 
     @Autowired
 
